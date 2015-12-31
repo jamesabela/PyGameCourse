@@ -1,0 +1,42 @@
+import pygame
+pygame.init()
+
+#General Variables
+running = True
+window = pygame.display.set_mode((800,600))
+clock = pygame.time.Clock()
+
+pygame.display.set_caption('Race car')
+
+class car(pygame.sprite.Sprite):
+    def __init__(self,location):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('racecar.png').convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.left,self.rect.top = location
+        self.x_change = 0
+        self.x = 370
+        self.y = 430
+
+
+#objects
+car1 = car([370,430])
+
+#The Loop
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                car1.x_change = -5
+            elif event.key == pygame.K_RIGHT:
+                car1.x_change = 5
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            car1.x_change = 0
+    car1.x += car1.x_change
+    window.fill((0, 0, 0))
+    window.blit(car1.image,[car1.x,car1.y])
+    pygame.display.update()
+    clock.tick(60)

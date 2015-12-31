@@ -1,0 +1,64 @@
+import pygame
+import random
+pygame.init()
+
+#General Variables
+running = True
+window = pygame.display.set_mode((400,600))
+clock = pygame.time.Clock()
+randx = random.randrange(0, 300)
+randy = 0
+marky = 600
+score = 0
+speed = 5
+
+pygame.display.set_caption('Race car')
+
+class car(pygame.sprite.Sprite):
+    def __init__(self,location):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('racecar.png').convert_alpha()
+        self.x_change = 0
+        self.x = 200
+        self.y = 430
+
+def road_markings(marky):
+    for i in reversed(range(0, 1800,120)):
+        pygame.draw.rect(window, (255, 255, 255),(190, marky-i, 20, 100))
+    return
+car1 = car([200,430])
+
+#The Loop
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                car1.x_change = -5
+            elif event.key == pygame.K_RIGHT:
+                car1.x_change = 5
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            car1.x_change = 0
+    if randy > 570:
+        randy = -100
+        randx = random.randrange(0, 300)
+        score = score + 1
+        print(score)
+        speed = speed + 0.1
+    randy = randy + speed
+    car1.x += car1.x_change
+    window.fill((0, 0, 0))
+    road_markings(marky)
+    marky = marky + speed
+    if marky > 1200:
+        marky = 600
+    rect1 = pygame.draw.rect(window, (255, 255, 0),(randx, randy, 100, 30))
+    window.blit(car1.image,[car1.x,car1.y])
+    rect2 = pygame.Rect(car1.x,car1.y,70,150)
+    pygame.display.update()
+    if rect2.colliderect(rect1) or car1.x<0 or car1.x>330:
+        print('crash')
+        running = False
+    clock.tick(60)

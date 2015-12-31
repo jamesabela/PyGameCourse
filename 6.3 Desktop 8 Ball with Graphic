@@ -1,0 +1,30 @@
+import pygame
+import random
+pygame.init()
+pygame.display.set_caption('Magic 8 ball')
+window = pygame.display.set_mode((300, 100))
+background_image = pygame.image.load("background.png").convert()
+#You will need an image 300 by 100 called background.png
+
+replies = ['Signs point to yes',
+        'Without a doubt',
+        'You may rely on it',
+        'Do not count on it',
+        'Looking good',
+        'Cannot predict now',
+        'It is decidedly so',
+        'Outlook not so good']
+running = True
+window.blit(background_image, [0, 0])
+#Write Text
+def fontprint():
+    font=pygame.font.Font(None,32)
+    text1=font.render(random.choice(replies), 1, (255,255,255))
+    window.blit(text1, (50, 50))
+    return
+fontprint()
+while running:
+    for event in pygame.event.get():
+        pygame.display.update()
+        if event.type == pygame.QUIT:
+            running = False

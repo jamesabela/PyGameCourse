@@ -1,0 +1,17 @@
+import pygame
+
+pygame.init()
+pygame.display.set_caption('Hello World!')
+window = pygame.display.set_mode((500, 400))
+running = True
+
+#Draw Once
+pygame.draw.rect(window, (0, 255, 0),(50, 50, 100, 50))
+pygame.draw.ellipse(window, (0, 0, 255),(100, 190, 60, 30))
+pygame.display.update()
+
+#Main Loop
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False

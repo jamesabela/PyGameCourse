@@ -1,0 +1,25 @@
+#Python 3.4.3 with Pygame
+import pygame
+
+pygame.init()
+pygame.display.set_caption('Crash!')
+pygame.mixer.music.load('Slap.wav')
+# This slap sound came from: http://soundbible.com/1948-Slap.html 
+# You need to add it to the same directory as the code.
+window = pygame.display.set_mode((300, 300))
+running = True
+
+#Draw Once
+rectplace = pygame.draw.rect(window, (255, 0, 0),(100, 100, 100, 100))
+pygame.display.update()
+#Main Loop
+while running:
+    pos = pygame.mouse.get_pos()
+    (pressed1,pressed2,pressed3) = pygame.mouse.get_pressed()
+    if rectplace.collidepoint(pos)& pressed1==1:
+        print("Don't slap me!")
+        pygame.mixer.music.play(0)
+        pygame.time.wait(500)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False

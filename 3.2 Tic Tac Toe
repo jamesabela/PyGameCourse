@@ -1,0 +1,22 @@
+import pygame
+pygame.init()
+pygame.display.set_caption('Drawing')
+window = pygame.display.set_mode((600, 600))
+running = True
+pygame.draw.rect(window, (0, 255, 0),(0, 200, 600, 10))
+pygame.draw.rect(window, (0, 255, 0),(0, 400, 600, 10))
+pygame.draw.rect(window, (0, 255, 0),(200, 0, 10, 600))
+pygame.draw.rect(window, (0, 255, 0),(400, 0, 10, 600))
+while running:
+    for event in pygame.event.get():
+        (mouseX, mouseY) = pygame.mouse.get_pos()
+        (pressed1,pressed2,pressed3) = pygame.mouse.get_pressed()
+        if pressed1 == 1:
+            pygame.draw.rect(window, (0, 0, 255),(mouseX, mouseY, 5, 5))
+        if pressed3 == 1:
+            pygame.draw.rect(window, (255, 0, 0),(mouseX, mouseY, 5, 5))
+#        print('x: ', mouseX, 'y: ', mouseY)
+#        print('pressed:',pressed1,pressed2,pressed3)
+        pygame.display.update()
+        if event.type == pygame.QUIT:
+            running = False

@@ -1,0 +1,15 @@
+import pygame
+pygame.init()
+pygame.display.set_caption('Hello World!')
+window = pygame.display.set_mode((600, 600))
+running = True
+#Draw once
+RedRect = pygame.draw.rect(window, (255, 0, 0),(0, 0, 50, 50))
+BlueRect = pygame.draw.rect(window, (0, 255, 0),(100, 100, 100, 100))
+GreenRect = pygame.draw.rect(window, (0, 0, 255),(100, 100, 100, 100))
+WhiteRect = pygame.draw.rect(window, (255, 255, 255),(100, 100, 100, 100))
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False

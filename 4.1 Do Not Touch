@@ -1,0 +1,18 @@
+import pygame
+
+pygame.init()
+pygame.display.set_caption('Crash!')
+window = pygame.display.set_mode((300, 300))
+running = True
+
+#Draw Once
+rectplace = pygame.draw.rect(window, (255, 0, 0),(100, 100, 100, 100))
+pygame.display.update()
+#Main Loop
+while running:
+    pos = pygame.mouse.get_pos()
+    if rectplace.collidepoint(pos):
+        print("Don't touch me!")
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
